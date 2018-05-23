@@ -39,6 +39,18 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # using rspec for testing
+  gem 'rspec-rails', '~> 3.7', '>= 3.7.2'
+  # using factory bot to generate models for testing
+  gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
+  # this gem helps us visualise the database
+  gem 'rails-erd', '~> 1.5', '>= 1.5.2'
+  # helps to populate our seed file with fake data
+  gem 'faker', '~> 1.8', '>= 1.8.7'
+  # gem used for testing model validations
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
+  # extra testing methods for rspec
+  gem 'rails-controller-testing'
 end
 
 group :development do
@@ -53,3 +65,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+#Gems for my views
+gem 'bootstrap', '~> 4.1.1'
+gem 'jquery-rails'
