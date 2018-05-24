@@ -1,0 +1,9 @@
+#In order for the application to run as expected you will need to create a file config/application.yml
+#Inside that file you should copy and paste the code below and add the correct values to the given keys
+
+development:
+  #email config variables
+  GMAIL_DOMAIN:
+  GMAIL_USERNAME: 
+  GMAIL_PASSWORD: 
+  ###########################

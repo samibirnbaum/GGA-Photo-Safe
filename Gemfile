@@ -72,3 +72,6 @@ gem 'jquery-rails'
 
 #Gem for user authentication
 gem 'devise'
+
+#Gem for managing secret ENV variables
+gem "figaro"
