@@ -12,14 +12,19 @@
  *
  *= require_tree .
  *= require_self
- */
- @import "bootstrap";
+*/
 
- //***********************//
+@import "bootstrap";
 
- //CSS FOR DEVISE VIEWS
- .sign-up-container{
-     width: 450px;
- }
+//***********************//
 
- //***********************//
+//CSS FOR DEVISE VIEWS
+.sign-up-container{
+    width: 450px;
+}
+
+.sign-in-container{
+    width: 450px;
+}
+
+//***********************//

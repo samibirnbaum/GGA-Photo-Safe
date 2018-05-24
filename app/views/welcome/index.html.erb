@@ -3,10 +3,15 @@
         <h1 class="display-4">Welcome to your Photo Safe</h1>
         <p class="lead">A secure place for all your important photos</p>
         <hr class="my-4">
-        <p>Sign Up or Sign In to get started!</p>
-        <!--These links need updating to erb and correct paths-->
-        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg mr-3"%> or
-        <a class="btn btn-primary btn-lg ml-3" href="#" role="button">Sign In</a>
+        <%if user_signed_in?%>
+            <p class="lead"><%=current_user.email%> you are in control!</p>
+            <!--update to be dynamic once created photo model-->
+            <p>You currently have 3 photos in your Photo Safe</p>
+        <%else%> 
+            <p>Sign Up or Sign In to get started!</p>
+            <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg mr-3"%> or
+            <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary btn-lg ml-3"%>
+        <%end%>
     </div>
 </div>
 
