@@ -25,9 +25,9 @@
         </div>
         <div class="navbar-nav">
           <!--INSERT LOGIC TO DISPLAY CORRECT LINK DEPENDING ON STATE-->
-          <a class="nav-item nav-link" href="#">Sign Up</a>
+          <%= link_to "Sign Up", new_user_registration_path, class: "nav-item nav-link"%>
           <a class="nav-item nav-link" href="#">Sign In</a>
-          <a class="nav-item nav-link" href="#">Sign Out</a>
+          <%= link_to "Sign Out", destroy_user_session_path, class: "nav-item nav-link", method: :delete  %>
         </div>
       </div>
     </nav>
