@@ -11,10 +11,44 @@
 
   <body>
     <!--NAV BAR-->
-    <!--insert nav bar for every page here-->
+   
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <span class="navbar-brand mb-0 h1">PhotoSafe</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <%= link_to "Home", root_path, class: "nav-item nav-link"%>
+          <a class="nav-item nav-link" href="#">Photos</a>
+        </div>
+        <div class="navbar-nav">
+          <!--INSERT LOGIC TO DISPLAY CORRECT LINK DEPENDING ON STATE-->
+          <a class="nav-item nav-link" href="#">Sign Up</a>
+          <a class="nav-item nav-link" href="#">Sign In</a>
+          <a class="nav-item nav-link" href="#">Sign Out</a>
+        </div>
+      </div>
+    </nav>
+    
+    
     
     <!--FLASH NOTICES-->
+    <%if flash[:notice] %>
+      <div class="alert alert-success alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <%elsif flash[:alert] %>
+      <div class="alert alert-warning">  
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:alert] %>
+      </div>
+    <%end%>
 
+    
+    
     <!--TEMPLATE PULLED IN HERE-->
     <%= yield %>
   </body>
