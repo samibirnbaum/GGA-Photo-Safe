@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  
   root "welcome#index"
+
+  devise_for :users
+  
+  resources :important_photos
 end
 
 
@@ -25,3 +29,12 @@ end
 #                              PUT     /users(.:format)                          devise/registrations#update
 #                              DELETE  /users(.:format)                          devise/registrations#destroy
 #                              POST    /users(.:format)                          devise/registrations#create
+
+# important_photos             GET     /important_photos(.:format)               important_photos#index
+#                              POST    /important_photos(.:format)               important_photos#create
+# new_important_photo          GET     /important_photos/new(.:format)           important_photos#new
+# edit_important_photo         GET     /important_photos/:id/edit(.:format)      important_photos#edit
+# important_photo              GET     /important_photos/:id(.:format)           important_photos#show
+#                              PATCH   /important_photos/:id(.:format)           important_photos#update
+#                              PUT     /important_photos/:id(.:format)           important_photos#update
+#                              DELETE  /important_photos/:id(.:format)           important_photos#destroy

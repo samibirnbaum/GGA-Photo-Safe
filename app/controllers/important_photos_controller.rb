@@ -1,0 +1,2 @@
+class ImportantPhotosController < ApplicationController
+end
