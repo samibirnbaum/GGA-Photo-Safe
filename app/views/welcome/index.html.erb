@@ -6,7 +6,7 @@
         <%if user_signed_in?%>
             <p class="lead"><%=current_user.email%> you are in control!</p>
             <!--update to be dynamic once created photo model-->
-            <p>You currently have 3 photos in your Photo Safe</p>
+            <p>You currently have <%=pluralize(current_user.important_photos.count, "photo")%> in your Photo Safe</p>
         <%else%> 
             <p>Sign Up or Sign In to get started!</p>
             <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-info btn-lg mr-3"%> or

@@ -1,7 +1,7 @@
 class ImportantPhotosController < ApplicationController
     #Permissions
     before_action :authenticate_user!
-    #before action make sure user owns the resource they are doing something with - destroy/show/edit/update
+    before_action :object_owner?, only: [:show, :edit, :update, :destroy]
     ###########################
 
 
@@ -23,4 +23,18 @@ class ImportantPhotosController < ApplicationController
             render(:new)
         end
     end
+
+    def show
+        @important_photo = ImportantPhoto.find(params["id"])
+    end
 end
+
+
+
+private
+    def object_owner?
+        unless ImportantPhoto.find(params["id"]).user == current_user
+            flash[:alert] = "Unauthorised Action"
+            redirect_to(root_path)
+        end
+    end

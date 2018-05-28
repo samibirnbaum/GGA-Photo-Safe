@@ -1,0 +1,11 @@
+<div class="container card bg-secondary mt-5 mb-5">
+    <%=image_tag("http://via.placeholder.com/1500x2000", alt: "show pic", class: "card-img-top mt-3 show-image")%>
+    <div class="card-body">
+        <h4 class="card-title"><%= @important_photo.title%></h4>
+        <h6 class="card-subtitle mb-2">Uploaded <%= time_ago_in_words(@important_photo.created_at)%> ago</h6>
+        <h6 class="card-subtitle mb-2">Uploaded by <%=@important_photo.user.email%></h6>
+        <p class="card-text"><%= @important_photo.description%></p>
+        <%= link_to "Edit Photo", edit_important_photo_path(@important_photo.id), class: "btn btn-info float-right"%> <br><br>
+        <%= link_to "Delete Photo", "/important_photos/#{@important_photo.id}", method: :delete, class: "btn btn-danger float-right", data: {confirm: 'Are you sure you want to delete this photo?'}%>
+    </div>
+</div>
