@@ -66,3 +66,9 @@ end
 
 #requiring config for factory_bot use with RSpec
 require 'support/factory_bot'
+
+#config for using devise helpers in RSpec tests
+RSpec.configure do |config|
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
+end
