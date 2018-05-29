@@ -1,0 +1,18 @@
+<!--Display error messages if object doesn't save and new template is re-rendered-->
+<%=render(partial: "error", locals: {object: @important_photo})%>
+
+<div class="container card text-center bg-secondary border-success mt-5 mb-5">
+    <div class="card-body">
+        <!--Guidelines-->
+        <h1>Edit Important Photo</h1>
+        <h5>Guidelines for your important photo:</h5>
+        <ul class="list-unstyled">
+            <li>Make sure the photo is clear.</li>
+            <li>Make the title relevant.</li>
+            <li>Provide a clear coherent description.</li>
+        </ul>
+
+        <!--Create Form-->
+        <%=render(partial: "form", locals: {object: @important_photo, submit_text: "Edit Photo"})%>
+    </div>
+</div>

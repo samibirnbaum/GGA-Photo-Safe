@@ -53,7 +53,6 @@ RSpec.describe ImportantPhotosController, type: :controller do
             end
             it 'redirects the user to the show page' do
                 post :create, params: {user: @user,important_photo: attributes_for(:important_photo)}
-                byebug
                 expect(response).to redirect_to(important_photo_path(ImportantPhoto.first.id))
             end
             it 're-renders the create form if save to the database fails' do
@@ -144,6 +143,99 @@ RSpec.describe ImportantPhotosController, type: :controller do
             it 'returns an http status of 200' do
                 get :index
                 expect(response).to have_http_status(200)
+            end
+        end
+    end
+
+
+
+
+
+
+
+    describe 'GET #edit' do
+        context 'user not signed in' do
+            it 'redirects user to sign in page' do
+                #built in devise functionality no need to test / dont know how
+            end
+        end
+    
+        context 'user signed in' do
+            context 'user trying to edit a photo they own' do
+                before do
+                    #creates important_photo from the factory and also automatically creates the user associated with it
+                    @ip = create(:important_photo)    
+                    sign_in(User.first)
+                end
+                it 'assigns the correct object to @important_photo' do
+                    get :edit, params: {id: @ip.id }
+                    expect(assigns(:important_photo).id).to eq(@ip.id)
+                end
+                it 'renders the edit view' do
+                    get :edit, params: {id: @ip.id }
+                    expect(response).to render_template(:edit)
+                end
+                it 'returns an http status of 200' do
+                    get :edit, params: {id: @ip.id }
+                    expect(response).to have_http_status(200)
+                end
+            end
+            context 'user trying to edit a photo they dont own' do
+                before do
+                    @ip = create(:important_photo) #owned by factory_bot user sami@sami.com
+                    new_user = create(:user, email: 'joe@joe.com')   
+                    sign_in(new_user)
+                end
+                it 'redirects user to the home page' do
+                    get :edit, params: {id: @ip.id }
+                    expect(response).to redirect_to(root_path)
+                end
+            end
+        end
+    end
+
+
+
+
+
+    describe 'PUT #update' do
+        context 'user not signed in' do
+            it 'redirects user to sign in page' do
+                #built in devise functionality no need to test / dont know how
+            end
+        end
+
+        context 'user signed in' do
+            context 'updates photo they own' do
+                before do
+                    @ip = create(:important_photo)    
+                    sign_in(User.first)
+                end
+                it 'adds new params data to the database' do
+                    put :update, params:{id: @ip.id, important_photo: {title: "updated title", description: "updated description"}}
+                    ip = ImportantPhoto.find(@ip.id)
+                    expect(ip.title).to eq("updated title")
+                    expect(ip.description).to eq("updated description")
+                end
+                it 'redirects the user to the show page' do
+                    put :update, params:{id: @ip.id, important_photo: {title: "updated title", description: "updated description"}}
+                    expect(response).to redirect_to(important_photo_path(@ip.id))
+                end
+                it 're-renders the update form if save to the database fails' do
+                    put :update, params:{id: @ip.id, important_photo: {title: "", description: ""}}
+                    expect(response).to render_template(:edit)
+                end
+            end
+            context 'updates photo they dont own' do
+                before do
+                    @ip = create(:important_photo) #owned by factory_bot user sami@sami.com
+                    new_user = create(:user, email: 'joe@joe.com')   
+                    sign_in(new_user)
+                end
+                it 'redirects user to the home page' do
+                    put :update, params:{id: @ip.id, important_photo: {title: "updated title", description: "updated description"}}
+                    expect(response).to redirect_to(root_path)
+                end
             end
         end
     end

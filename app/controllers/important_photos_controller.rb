@@ -31,6 +31,24 @@ class ImportantPhotosController < ApplicationController
     def index
         @important_photos = ImportantPhoto.where({ user: current_user})
     end
+
+    def edit
+        @important_photo = ImportantPhoto.find(params["id"])
+    end
+
+    def update
+        @important_photo = ImportantPhoto.find(params["id"])
+        @important_photo.title = params["important_photo"]["title"]
+        @important_photo.description = params["important_photo"]["description"]
+
+        if @important_photo.save
+            flash[:notice] = "Your photo '#{@important_photo.title}' has successfully been updated."
+            redirect_to(important_photo_path(@important_photo.id))
+        else
+            flash.now[:alert] = "Photo not updated, please try again."
+            render(:edit)
+        end
+    end
 end
 
 
