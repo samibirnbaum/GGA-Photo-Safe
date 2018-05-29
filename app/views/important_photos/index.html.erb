@@ -1,0 +1,22 @@
+<%= link_to "Add a photo to your safe", new_important_photo_path, class: "btn btn-success float-right mt-3 mr-3"%>
+
+<%@important_photos.each do |photo|%>
+    <section>
+        <div class="ml-3 py-3 w-75">
+            <div class="card card-height bg-secondary">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="http://via.placeholder.com/400x600" class="w-100 h-100">
+                    </div>
+                    <div class="col-md-8 px-3">
+                        <div class="card-block px-3 mt-3">
+                            <h4 class="card-title"><%=photo.title%></h4>
+                            <p class="card-text"><%=photo.description%> </p>
+                            <%= link_to "View Photo", important_photo_path(photo.id), class: "btn btn-info"%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<%end%>

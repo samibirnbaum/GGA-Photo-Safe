@@ -28,6 +28,14 @@ RSpec.describe ImportantPhotosController, type: :controller do
         end
     end
 
+    
+    
+    
+    
+    
+    
+    
+    
     describe 'POST #create' do
         context 'user not signed in' do
             it 'redirects user to sign in page' do
@@ -55,6 +63,13 @@ RSpec.describe ImportantPhotosController, type: :controller do
         end
     end
 
+    
+    
+    
+    
+    
+    
+    
     describe 'GET #show' do
         context 'user not signed in' do
             it 'redirects user to sign in page' do
@@ -92,6 +107,43 @@ RSpec.describe ImportantPhotosController, type: :controller do
                     get :show, params: {id: @ip.id }
                     expect(response).to redirect_to(root_path)
                 end
+            end
+        end
+    end
+
+
+
+
+
+    describe 'GET #index' do
+        context 'user not signed in' do
+            it 'redirects user to sign in page' do
+                #built in devise functionality no need to test / dont know how
+            end
+        end
+    
+        context 'user signed in' do
+            before do
+                @user = create(:user)    
+                sign_in(@user)
+            end
+            it 'assigns to @important_photos only the photos you own' do
+                ImportantPhoto.create(title: "1st photo", description: "important", user: @user)
+                ImportantPhoto.create(title: "2nd photo", description: "important", user: @user)
+                ImportantPhoto.create(title: "3rd photo", description: "important", user: @user)
+                create(:important_photo, title:"others photo", user: create(:user, email: "mike@mike.com"))
+                get :index
+                expect(assigns(:important_photos)[0].title).to eq("1st photo")
+                expect(assigns(:important_photos)[2].title).to eq("3rd photo")
+                expect(assigns(:important_photos).any? {|element| element.title == "others photo"}).to be false
+            end
+            it 'renders the index view' do
+                get :index
+                expect(response).to render_template(:index)
+            end
+            it 'returns an http status of 200' do
+                get :index
+                expect(response).to have_http_status(200)
             end
         end
     end

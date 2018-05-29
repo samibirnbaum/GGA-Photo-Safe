@@ -27,7 +27,15 @@ class ImportantPhotosController < ApplicationController
     def show
         @important_photo = ImportantPhoto.find(params["id"])
     end
+
+    def index
+        @important_photos = ImportantPhoto.where({ user: current_user})
+    end
 end
+
+
+
+
 
 
 
