@@ -49,6 +49,17 @@ class ImportantPhotosController < ApplicationController
             render(:edit)
         end
     end
+
+    def destroy
+        @important_photo = ImportantPhoto.find(params["id"])
+        if @important_photo.destroy
+            flash[:notice] = "Your photo '#{@important_photo.title}' has successfully been deleted."
+            redirect_to(important_photos_path)
+        else
+            flash.now[:alert] = "Error deleting photo, please try again."
+            render(:show)
+        end
+    end
 end
 
 

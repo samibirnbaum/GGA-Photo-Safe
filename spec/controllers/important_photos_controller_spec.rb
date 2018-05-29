@@ -239,4 +239,50 @@ RSpec.describe ImportantPhotosController, type: :controller do
             end
         end
     end
+
+
+
+
+
+
+    describe 'DELETE #destroy' do
+        context 'user not signed in' do
+            it 'redirects user to sign in page' do
+                #built in devise functionality no need to test / dont know how
+            end
+        end
+
+        context 'user signed in' do
+            context 'user deleting a photo they own' do
+                before do
+                    @ip = create(:important_photo)    
+                    sign_in(User.first)
+                end
+                it 'deletes the photo from the database' do
+                    delete :destroy, params: {id: @ip.id}
+                    # because this object no longer exists, when we query it in this way, we expect to get an empty array
+                    expect(ImportantPhoto.where(id: @ip.id)).to eq([])
+                end
+                it 'redirects user to the index page' do
+                    delete :destroy, params: {id: @ip.id}
+                    expect(response).to redirect_to(important_photos_path)
+                end
+                it 'returns an http status of 302' do
+                    delete :destroy, params: {id: @ip.id}
+                    expect(response).to have_http_status(302)
+                end
+            end
+            context 'user deleting a photo they dont own' do
+                before do
+                    @ip = create(:important_photo) #owned by factory_bot user sami@sami.com
+                    new_user = create(:user, email: 'joe@joe.com')   
+                    sign_in(new_user)
+                end
+                it 'redirects user to the home page' do
+                    delete :destroy, params: {id: @ip.id}                    
+                    expect(response).to redirect_to(root_path)
+                end
+            end
+        end
+    end
 end
