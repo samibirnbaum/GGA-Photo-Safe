@@ -13,6 +13,20 @@ The Photo Safe application allows you to sign in securely and manage all your im
 
 [Visit Site](https://gga-photo-safe.herokuapp.com/ )
 
+## Understanding Issues
+
+Following phase 1 of the project build, there are currently two types of issues that remain open.
+
+These can be identified by their labels.
+
+- Enhancement Label: This is a feature/issue which is not essential for producing the MVP (Minimal Viable Product) but is likely to be implemented in the future.
+
+- Bug Label: This records known bugs that require attention.
+
+Note: Issues may contain relevant comments and snapshots.
+
+These issues along with their corresponding milestones can be viewed on [GitHub](https://github.com/samibirnbaum/GGA-Photo-Safe/issues) or [HuBoard](https://huboard.com/samibirnbaum/GGA-Photo-Safe#/milestones), a project manager tool I use to manage my GitHub issues.
+
 ## Usage
 
 1. Fork and clone the repo: `git clone https://github.com/samibirnbaum/GGA-Photo-Safe.git`
@@ -20,8 +34,4 @@ The Photo Safe application allows you to sign in securely and manage all your im
 3. Run `$ bundle install` to download/install the needed dependencies
 4. Start the local server: `$ rails s`.
 5. Open a web browser and go to `http://localhost:3000`.
-
-
-
-HuBoard (project manager tool I use for my GitHub issues relating to the project): https://huboard.com/samibirnbaum/GGA-Photo-Safe#/milestones
 
