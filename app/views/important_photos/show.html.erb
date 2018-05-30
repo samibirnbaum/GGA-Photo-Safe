@@ -1,5 +1,5 @@
 <div class="container card bg-secondary mt-5 mb-5">
-    <%=image_tag("http://via.placeholder.com/1500x2000", alt: "show pic", class: "card-img-top mt-3 show-image")%>
+    <%=image_tag(@important_photo.important_photo.url, alt: "show pic", class: "card-img-top mt-3 show-image")%>
     <div class="card-body">
         <h4 class="card-title"><%= @important_photo.title%></h4>
         <hr>

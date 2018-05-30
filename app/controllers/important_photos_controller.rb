@@ -10,11 +10,9 @@ class ImportantPhotosController < ApplicationController
     end
 
     def create
-        @important_photo = ImportantPhoto.new
+        @important_photo = ImportantPhoto.new(allowed_params)
         @important_photo.user = current_user
-        @important_photo.title = params["important_photo"]["title"]
-        @important_photo.description = params["important_photo"]["description"]
-
+    
         if @important_photo.save
             flash[:notice] = "Your photo '#{@important_photo.title}' has successfully been saved."
             redirect_to(important_photo_path(@important_photo.id))
@@ -38,8 +36,7 @@ class ImportantPhotosController < ApplicationController
 
     def update
         @important_photo = ImportantPhoto.find(params["id"])
-        @important_photo.title = params["important_photo"]["title"]
-        @important_photo.description = params["important_photo"]["description"]
+        @important_photo.assign_attributes(allowed_params)
 
         if @important_photo.save
             flash[:notice] = "Your photo '#{@important_photo.title}' has successfully been updated."
@@ -53,7 +50,7 @@ class ImportantPhotosController < ApplicationController
     def destroy
         @important_photo = ImportantPhoto.find(params["id"])
         if @important_photo.destroy
-            flash[:notice] = "Your photo '#{@important_photo.title}' has successfully been deleted."
+            flash[:alert] = "Your photo '#{@important_photo.title}' has successfully been deleted."
             redirect_to(important_photos_path)
         else
             flash.now[:alert] = "Error deleting photo, please try again."
@@ -75,3 +72,7 @@ private
             redirect_to(root_path)
         end
     end
+
+    def allowed_params
+        params.require(:important_photo).permit(:title, :description, :important_photo, :remove_important_photo)
+    end 

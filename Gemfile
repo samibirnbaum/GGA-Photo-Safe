@@ -75,3 +75,9 @@ gem 'devise'
 
 #Gem for managing secret ENV variables
 gem "figaro"
+
+#Gem for uploading files
+gem 'carrierwave', '~> 1.0'
+
+#Gem for image sizing with carrierwave
+gem "mini_magick"

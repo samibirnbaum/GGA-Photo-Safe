@@ -28,6 +28,7 @@ users = User.all
     ImportantPhoto.create!(
         title: Faker::Job.field,
         description: Faker::HarryPotter.quote,
+        remote_important_photo_url: "https://picsum.photos/1500/1750/?random",
         user: users.sample
     )
 end
