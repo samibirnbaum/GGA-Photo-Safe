@@ -14,6 +14,7 @@ class ImportantPhotoUploader < CarrierWave::Uploader::Base
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
+  # Image can be found app/assets/images/default.png
   def default_url
     "default.png"
   end
