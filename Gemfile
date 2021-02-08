@@ -86,7 +86,7 @@ gem 'devise'
 gem "figaro"
 
 #Gem for uploading files
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 
 #Gem for image sizing with carrierwave
 gem "mini_magick"
